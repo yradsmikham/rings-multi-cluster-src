@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include:
+    - master
+    - featureA
+    - '*'
+  paths:
+    include:
+    - src/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'hellorings_acr'
+    repository: 'hellorings'
+    command: 'buildAndPush'
+    Dockerfile: '**/src/Dockerfile'
+    tags: 'hello-rings-$(Build.SourceBranchName)-$(Build.BuildId)'
