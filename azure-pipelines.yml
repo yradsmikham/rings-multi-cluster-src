@@ -2,7 +2,6 @@ trigger:
   branches:
     include:
     - master
-    - featureA
     - '*'
   paths:
     include:
@@ -15,7 +14,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'hellorings_acr'
-    repository: 'hellorings'
+    repository: 'rings-multi-cluster'
     command: 'buildAndPush'
     Dockerfile: '**/src/Dockerfile'
-    tags: 'hello-rings-$(Build.SourceBranchName)-$(Build.BuildId)'
+    tags: 'rings-multi-cluster-$(Build.SourceBranchName)-$(Build.BuildId)'
